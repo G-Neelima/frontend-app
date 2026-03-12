@@ -1,0 +1,12 @@
+.row{
+    display: flex;
+    padding: 5px;
+    flex-wrap: wrap;
+}
+
+.box{
+    border: 1px solid grey;
+    padding: 5px;
+    margin: 5px;
+    
+}

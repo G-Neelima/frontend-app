@@ -1,7 +1,10 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
+import "./Content.css"
+
+const API_URL= import.meta.env.VITE_API_URL;
 function Content(){
-    const [count,setCount]=useState(0);
+    //const [count,setCount]=useState(0); // usestate hook is used to create a variable and update the variable
     const [products,setProducts] = useState([]);
     const increment=()=>{
         setCount(count+1);
@@ -10,28 +13,34 @@ function Content(){
         setCount(count-1);
     }
     const fetchProducts= async ()=>{
-        const url = "https://backend-app-z2t4.onrender.com/store" //fetching the information from this url , data is in json format , fetching this live data
+        const url = `${API_URL}/store` //fetching the information from this url , data is in json format , fetching this live data
         const res= await axios.get(url);
         setProducts(res.data)
 
 
     };
-    useEffect(()=>{
+    useEffect(()=>{//as soon as we load the page this hook is invoked only once and it invokes fetchProducts
         fetchProducts();
     },[]);
     return (
     <div>
-        <h3>Products Page</h3>
-        <button onClick={decrement}>-</button>
+        
+        {/* <button onClick={decrement}>-</button>
         {count}
         <button onClick={increment}>+</button>
-        <hr /> 
-        <ol>
+        <hr />  */}
+        <div className="row">
             {products.map((product) => (
-                <li>{product.name}</li>
+                <div className="box">
+                    <img src={`${API_URL}/${product.imageUrl}`} width="300px" alt="" />
+                    <h3>{product.name}</h3>
+                    <p>{product.desc}</p>
+                    <h4>{product.price}</h4>
+                    <p><button>Add to cart</button></p>
+                    </div>
             ))}
 
-        </ol>
+        </div>
     </div>
     );
 }
