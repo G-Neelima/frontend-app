@@ -1,4 +1,3 @@
-//App.jsx
 import { useState, createContext } from "react";
 export const AppContext = createContext();
 export default function App() {
